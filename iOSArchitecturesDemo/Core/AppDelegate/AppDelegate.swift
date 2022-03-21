@@ -12,13 +12,40 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var appStartManager: AppStartManager?
-    
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.appStartManager = AppStartManager(window: self.window)
-        self.appStartManager?.start()
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        start()
         return true
     }
-}
 
+    func start() {
+        let tabBarVC = UITabBarController()
+        let appsVC = SearchBuilder.build()
+        let songsVC = SongSearchBuilder.build()
+        appsVC.navigationItem.title = "Apps via iTunes"
+        songsVC.navigationItem.title = "Songs via iTunes"
+
+        let appsNavVC = configuredNavigationController
+        appsNavVC.viewControllers = [appsVC]
+
+        let songsNavVC = configuredNavigationController
+        songsNavVC.viewControllers = [songsVC]
+
+        tabBarVC.viewControllers = [appsNavVC, songsNavVC]
+        appsNavVC.tabBarItem.title = "Apps"
+        songsNavVC.tabBarItem.title = "Songs"
+
+        window = UIWindow()
+        window?.rootViewController = tabBarVC
+        window?.makeKeyAndVisible()
+    }
+
+    private var configuredNavigationController: UINavigationController {
+        let navVC = UINavigationController()
+        navVC.navigationBar.barTintColor = UIColor.varna
+        navVC.navigationBar.isTranslucent = false
+        navVC.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navVC.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        return navVC
+    }
+}

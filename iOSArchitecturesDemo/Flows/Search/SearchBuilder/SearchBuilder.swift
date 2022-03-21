@@ -18,5 +18,4 @@ class SearchBuilder {
         presenter.viewInput = viewController
         return viewController
     }
-    
 }
