@@ -12,6 +12,7 @@ final class AppDetailViewController: UIViewController {
     
     public var app: ITunesApp
     private lazy var headerViewController = AppDetailHeaderViewController(app: app)
+    private lazy var versionViewController = AppDetailVersionsViewController(app: app)
     
     private let imageDownloader = ImageDownloader()
     
@@ -69,25 +70,21 @@ final class AppDetailViewController: UIViewController {
             headerViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
             headerViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
-        
     }
     
     private func addDescriptionViewController() {
         //ДЗ: Добавить другие модели
+
+        self.addChild(versionViewController)
+        self.view.addSubview(versionViewController.view)
         
-        let descriptionViewController = UIViewController()
-        
-        self.addChild(descriptionViewController)
-        self.view.addSubview(descriptionViewController.view)
-        
-        descriptionViewController.didMove(toParent: self)
-        descriptionViewController.view.translatesAutoresizingMaskIntoConstraints = false
+        versionViewController.didMove(toParent: self)
+        versionViewController.view.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-//            descriptionViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            descriptionViewController.view.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-            descriptionViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            descriptionViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+            versionViewController.view.topAnchor.constraint(equalTo: headerViewController.view.bottomAnchor, constant: 10),
+            versionViewController.view.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            versionViewController.view.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
     }
     
