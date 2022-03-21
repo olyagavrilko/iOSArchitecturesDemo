@@ -53,7 +53,6 @@ final class SongSearchViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.songSearchView.searchBar.delegate = self
         self.songSearchView.tableView.register(SongCell.self, forCellReuseIdentifier: Constants.reuseIdentifier)
-//        self.songSearchView.tableView.delegate = self
         self.songSearchView.tableView.dataSource = self
     }
 
@@ -80,16 +79,6 @@ extension SongSearchViewController: UITableViewDataSource {
         return cell
     }
 }
-
-//MARK: - UITableViewDelegate
-//extension SongSearchViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let song = searchResults[indexPath.row]
-//        songSearchPresenter.viewDidSelectSong(song: song)
-//    }
-//}
 
 //MARK: - UISearchBarDelegate
 extension SongSearchViewController: UISearchBarDelegate {
